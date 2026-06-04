@@ -15,6 +15,7 @@ See [basic.js](basic.js).
 
 | File | Description |
 |---|---|
-| `basic.js` | Standalone fetch examples for every endpoint |
+| `basic.js` | Standalone fetch examples for every read endpoint |
+| `write.js` | Create and manage groups, keys, translations, and cache |
 | `helper.js` | Reusable helper module |
 | `with-cache.js` | In-memory cache layer to reduce API calls |

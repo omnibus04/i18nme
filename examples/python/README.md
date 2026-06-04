@@ -4,7 +4,8 @@
 
 | File | Description |
 |---|---|
-| `basic.py` | Standalone script — every endpoint |
+| `basic.py` | Standalone script — every read endpoint |
+| `write.py` | Create and manage groups, keys, translations, and cache |
 | `client.py` | Reusable client class |
 | `django_middleware.py` | Django middleware — attaches `request.t()` |
 | `fastapi_dependency.py` | FastAPI dependency — inject translations into routes |

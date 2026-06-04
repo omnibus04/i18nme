@@ -5,6 +5,7 @@
 | File | Description |
 |---|---|
 | `client.ts` | Typed i18nme client (plain TypeScript, no framework) |
+| `write.ts` | Typed write examples — groups, keys, translations, cache |
 | `nextjs/lib/i18n.ts` | Next.js App Router integration with ISR |
 | `nextjs/hooks/useTranslations.ts` | Client-side hook for SPA pages |
 | `nextjs/middleware.ts` | Locale detection middleware |

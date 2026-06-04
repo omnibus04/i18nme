@@ -43,9 +43,18 @@ Response shape:
 ```
 examples/
   javascript/     Vanilla JS / Node.js (fetch, no extra deps)
+    basic.js      Read examples for every GET endpoint
+    write.js      Write examples — groups, keys, languages, cache
+    helper.js     Reusable helper module
+    with-cache.js In-memory cache layer to reduce API calls
   typescript/     TypeScript helper + Next.js integration
+    client.ts     Typed read client
+    write.ts      Typed write examples
   react/          React hook + context provider
   python/         httpx helper, Django middleware, FastAPI dependency
+    basic.py      Read examples for every GET endpoint
+    write.py      Write examples — groups, keys, languages, cache
+    client.py     Reusable client class
   go/             net/http helper
   php/            Guzzle helper
 docs/
@@ -60,6 +69,8 @@ docs/
 
 ## API overview
 
+### Read endpoints
+
 | Endpoint | Description |
 |---|---|
 | `GET /health` | Service health check (no auth) |
@@ -70,7 +81,27 @@ docs/
 | `GET /v1/translations/{lang}/{group}` | Keys in a namespace |
 | `GET /v1/translations/{lang}/{group}/{key}` | Single key value |
 
-**Cached endpoints** serve pre-built JSON from S3 — recommended for production (sub-50 ms, no DB reads).
+**Cached endpoints** serve pre-built JSON from S3 — recommended for production.
+
+### Write endpoints
+
+| Endpoint | Description |
+|---|---|
+| `GET /v1/languages` | List registered languages |
+| `POST /v1/languages` | Add a language |
+| `DELETE /v1/languages/{code}` | Remove a language + all its translations |
+| `GET /v1/groups` | List groups |
+| `POST /v1/groups` | Create a group |
+| `PATCH /v1/groups/{name}` | Rename a group |
+| `DELETE /v1/groups/{name}` | Delete a group and all its keys |
+| `GET /v1/keys` | List translation keys |
+| `POST /v1/keys` | Create a translation key |
+| `PATCH /v1/keys/{id}` | Update key metadata |
+| `DELETE /v1/keys/{id}` | Soft-delete a key |
+| `PUT /v1/keys/{id}/translations/{lang}` | Upsert a translation value |
+| `DELETE /v1/keys/{id}/translations/{lang}` | Delete a translation value |
+| `POST /v1/cache/rebuild` | Trigger async cache rebuild |
+| `GET /v1/cache/status` | Check last rebuild timestamp |
 
 ---
 
