@@ -6,9 +6,9 @@ The API enforces per-key daily rate limits to ensure fair use.
 
 | Plan | Requests / day |
 |---|---|
-| Free | 1,000 |
-| Starter | 10,000 |
-| Pro | 100,000 |
+| Free | 5,000 |
+| Builder | 100,000 |
+| Growth | 1,000,000 |
 
 - Counter resets at **midnight UTC** every day.
 - Tracked **per API key**, not per IP.

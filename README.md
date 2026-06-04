@@ -85,9 +85,9 @@ Keys are project-scoped — one key cannot access another project's data.
 
 | Plan | Requests / day |
 |---|---|
-| Free | 1,000 |
-| Starter | 10,000 |
-| Pro | 100,000 |
+| Free | 5,000 |
+| Builder | 100,000 |
+| Growth | 1,000,000 |
 
 The counter resets at midnight UTC. A 10% grace zone applies before hard blocking. On `429`, use the `Retry-After` header value.
 
