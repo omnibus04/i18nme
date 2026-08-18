@@ -1,0 +1,55 @@
+name: "i18nme sync"
+description: "Translate changed source strings with i18nme and open a PR with the results."
+author: "i18nme"
+branding:
+  icon: "globe"
+  color: "purple"
+
+inputs:
+  api-key:
+    description: "i18nme project API key"
+    required: true
+  working-directory:
+    description: "Directory containing i18nme.config.json"
+    required: false
+    default: "."
+  commit-message:
+    description: "Commit message for the sync PR"
+    required: false
+    default: "chore(i18n): sync translations via i18nme"
+  branch:
+    description: "Branch name to push the sync commit to"
+    required: false
+    default: "i18nme-sync"
+  base:
+    description: "Base branch to open the PR against"
+    required: false
+    default: ""
+
+runs:
+  using: "composite"
+  steps:
+    - name: Set up Node
+      uses: actions/setup-node@v4
+      with:
+        node-version: "20"
+
+    - name: Run i18nme sync
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+      env:
+        I18NME_API_KEY: ${{ inputs.api-key }}
+      run: npx --yes i18nme@latest sync
+
+    - name: Open pull request with updated translations
+      uses: peter-evans/create-pull-request@v6
+      with:
+        commit-message: ${{ inputs.commit-message }}
+        branch: ${{ inputs.branch }}
+        base: ${{ inputs.base }}
+        title: "chore(i18n): sync translations"
+        body: |
+          Automated translation sync via the [i18nme GitHub Action](https://github.com/omnibus04/i18nme/tree/main/cli).
+
+          Only changed source strings were translated — cache hits (unchanged strings) cost nothing.
+        delete-branch: true
